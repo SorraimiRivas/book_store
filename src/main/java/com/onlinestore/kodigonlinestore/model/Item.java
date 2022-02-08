@@ -1,4 +1,4 @@
-package com.onlinestore.kodigonlinestore.model;
+package com.onlinestore.kodigonlinestore.Model;
 
 import lombok.Getter;
 import lombok.Setter;

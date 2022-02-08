@@ -1,11 +1,11 @@
 package com.onlinestore.kodigonlinestore.Controller;
-import com.onlinestore.kodigonlinestore.model.Item;
+import com.onlinestore.kodigonlinestore.Model.Item;
 
-public class ItemOrder implements com.onlinestore.kodigonlinestore.controller.ITotal {
+public class ItemOrder implements com.onlinestore.kodigonlinestore.Controller.ITotal {
     private Item item;
     private int quantity;
 
-    public ItemOrder(com.onlinestore.kodigonlinestore.model.Item item, int quantity) {
+    public ItemOrder(com.onlinestore.kodigonlinestore.Model.Item item, int quantity) {
         this.item = item;
         this.quantity = quantity;
     }
