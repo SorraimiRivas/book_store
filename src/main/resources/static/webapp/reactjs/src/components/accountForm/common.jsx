@@ -47,6 +47,29 @@ export const Input = styled.input`
   }
   &:focus {
     outline: none;
-    border-bottom: 2px solid rgb(241, 196, 15);
+    border-bottom: 2px solid #0fb3e0;
+  }
+`;
+
+export const SubmitButton = styled.button`
+  width: 100%;
+  padding: 11px 40%;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px 100px 100px 100px;
+  cursor: pointer;
+  transition: all, 240ms ease-in-out;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 27%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  &:hover {
+    filter: brightness(1.3);
+    transform: scale(1.1);
   }
 `;

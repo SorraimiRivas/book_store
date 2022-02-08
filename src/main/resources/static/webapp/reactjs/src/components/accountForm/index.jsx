@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { LoginForm } from "./loginForm";
+import { SignupForm } from "./signupForm";
+import { motion } from "framer-motion";
+import { AccountContext } from "../accountContext";
 
 const BoxContainer = styled.div`
   width: 300px;
-  min-height: 550px;
+  min-height: 580px;
   display: flex;
   flex-direction: column;
   border-radius: 19px;
@@ -23,14 +27,14 @@ const TopContainer = styled.div`
   padding-bottom: 5em;
 `;
 
-const BackDrop = styled.div`
+const BackDrop = styled(motion.div)`
   width: 160%;
-  height: 600px;
+  height: 550px;
   position: absolute;
   display: flex;
   flex-direction: column;
   border-radius: 50%;
-  transform: rotate(45deg);
+  transform: rotate(60deg);
   top: -290px;
   left: -70px;
   background: rgb(2, 0, 36);
@@ -66,14 +70,89 @@ const SmallText = styled.h5`
   margin-top: 10px;
 `;
 
+const InnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.8em;
+`;
+
+const backdropVariants = {
+  expanded: {
+    width: "233%",
+    height: "1005px",
+    borderRadius: "20%",
+    transform: "rotate(60deg)",
+  },
+
+  collapsed: {
+    width: "160%",
+    height: "550px",
+    borderRadius: "50%",
+    transform: "rotate(60deg)",
+  },
+};
+
+const expandingTransition = {
+  type: "spring",
+  duration: 2.3,
+  stiffness: 30,
+};
+
 export function AccountForm(props) {
+  const [isExpanded, setExpanded] = useState(false);
+  const [active, setActive] = useState("signin");
+
+  const playExpandingAnimation = () => {
+    setExpanded(true);
+    setTimeout(() => {
+      setExpanded(false);
+    }, expandingTransition.duration * 1000 - 1500);
+  };
+
+  const switchToSignup = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signup");
+    }, 400);
+  };
+
+  const switchToSignin = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signin");
+    }, 400);
+  };
+
+  const contextValue = { switchToSignin, switchToSignup };
   return (
-    <BoxContainer>
-      <TopContainer>
-        <BackDrop />
-        <HeaderText>Welcome to the Kodig Online Store</HeaderText>
-        <SmallText>Please sign in to continue.</SmallText>
-      </TopContainer>
-    </BoxContainer>
+    <AccountContext.Provider value={contextValue}>
+      <BoxContainer>
+        <TopContainer>
+          <BackDrop
+            initial={false}
+            animate={isExpanded ? "expanded" : "collapsed"}
+            variants={backdropVariants}
+            transition={expandingTransition}
+          />
+          {active === "signin" && (
+            <HeaderContainer>
+              <HeaderText>Welcome to Kodigo's Book Store </HeaderText>
+              <SmallText>Please sign-in to continue.</SmallText>
+            </HeaderContainer>
+          )}
+          {active === "signup" && (
+            <HeaderContainer>
+              <HeaderText>Create an account</HeaderText>
+              <SmallText>Please sign-up to continue.</SmallText>
+            </HeaderContainer>
+          )}
+        </TopContainer>
+        <InnerContainer>
+          {active === "signin" && <LoginForm />}
+          {active === "signup" && <SignupForm />}
+        </InnerContainer>
+      </BoxContainer>
+    </AccountContext.Provider>
   );
 }

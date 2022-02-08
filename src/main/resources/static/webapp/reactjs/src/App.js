@@ -1,6 +1,7 @@
 import "./App.css";
 import styled from "styled-components";
 import { AccountForm } from "./components/accountForm";
+import { LoginForm } from "./components/accountForm/loginForm";
 
 const AppContainer = styled.div`
   width: 100%;
