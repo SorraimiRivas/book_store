@@ -1,4 +1,4 @@
-package com.onlinestore.kodigonlinestore.Controller;
+package com.onlinestore.kodigonlinestore.Model;
 import com.onlinestore.kodigonlinestore.Interface.ITotal;
 import com.onlinestore.kodigonlinestore.Model.Item;
 
