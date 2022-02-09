@@ -1,6 +1,6 @@
-package com.onlinestore.kodigonlinestore.controller;
+package com.onlinestore.kodigonlinestore.Controller;
 
-import com.onlinestore.kodigonlinestore.model.Item;
+import com.onlinestore.kodigonlinestore.Model.Item;
 
 import java.util.Scanner;
 
