@@ -1,19 +1,24 @@
 package com.onlinestore.kodigonlinestore.Model;
+
 import com.onlinestore.kodigonlinestore.Interface.ITotal;
 import com.onlinestore.kodigonlinestore.Model.Item;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter@Setter
 
 public class ItemOrder implements ITotal {
     private Item item;
-    private int quantity;
+    private double quantity;
 
-    public ItemOrder(com.onlinestore.kodigonlinestore.Model.Item item, int quantity) {
-        this.item = item;
-        this.quantity = quantity;
+    public ItemOrder(){
     }
 
     @Override
     public double getTotal() {
-        return 0;
+        return item.getItemPrice()*quantity;
     }
 }
 

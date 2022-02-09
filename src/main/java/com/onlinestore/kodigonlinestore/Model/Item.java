@@ -16,13 +16,13 @@ public abstract class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long itemId;
     private String title;
-    private String itemPrice;
+    private Long itemPrice;
     private String itemImage;
     private String category;
 
     public Item(String title,
                 Long itemId,
-                String itemPrice,
+                Long itemPrice,
                 String itemImage,
                 String category) {
         this.title = title;
