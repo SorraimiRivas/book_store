@@ -10,7 +10,7 @@ import {
   BoldLink,
 } from "./common";
 
-export function LoginForm(props) {
+export function LoginForm() {
   const { switchToSignup } = useContext(AccountContext);
 
   return (

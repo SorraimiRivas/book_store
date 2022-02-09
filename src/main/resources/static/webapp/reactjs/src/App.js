@@ -1,7 +1,10 @@
 import "./App.css";
 import styled from "styled-components";
-import { AccountForm } from "./components/accountForm";
-import { LoginForm } from "./components/accountForm/loginForm";
+// import { AccountForm } from "./components/accountForm";
+// import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import { NavbarLink } from "./components/accountForm/common";
+// import HomeScreen from "./components/screens/HomeScreen";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -14,9 +17,11 @@ const AppContainer = styled.div`
 
 function App() {
   return (
-    <AppContainer>
-      <AccountForm />
-    </AppContainer>
+    // <AppContainer>
+    //   <AccountForm />
+    <Navbar></Navbar>
+    // </AppContainer>
+    // <HomeScreen />
   );
 }
 

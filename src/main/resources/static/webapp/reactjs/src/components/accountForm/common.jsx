@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+// Login Form Styles
 
 export const BoxContainer = styled.div`
   width: 100%;
@@ -71,5 +74,87 @@ export const SubmitButton = styled.button`
   &:hover {
     filter: brightness(1.3);
     transform: scale(1.1);
+  }
+`;
+
+// Navigation Bar Styles
+
+export const NavbarContainer = styled.nav`
+  width: 100%;
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  background: rgb(25,9,175);
+  background: linear-gradient(90deg,
+  rgba(25,9,175,1) 0%,
+  rgba(2,145,185,1) 29%);
+  );
+`;
+
+export const LeftContainer = styled.div`
+  flex: 70%;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+`;
+
+export const RightContainer = styled.div`
+  flex: 30%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 50px;
+`;
+
+export const NavbarInnerContainer = styled.div`
+  width: 100%;
+  height: 65px;
+  display: flex;
+`;
+
+export const NavbarLinkContainer = styled.div`
+  display: flex;
+`;
+
+export const NavbarLink = styled(Link)`
+  color: red;
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  margin: 10px;
+`;
+
+export const NavbarLinkExtended = styled(Link)`
+  color: white;
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  margin: 10px;
+`;
+
+export const Logo = styled.img`
+  margin: 10px;
+  max-width: 180px;
+  height: auto;
+`;
+
+export const OpenLinksButton = styled.button`
+  width: 70px;
+  height: 50px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 45px;
+  cursor: pointer;
+  @media (min-width: 700px) {
+    display: none;
+  }
+`;
+
+export const NavbarExtendedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 700px) {
+    display: none;
   }
 `;
