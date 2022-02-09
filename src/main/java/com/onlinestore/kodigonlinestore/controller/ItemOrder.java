@@ -1,7 +1,8 @@
 package com.onlinestore.kodigonlinestore.Controller;
+import com.onlinestore.kodigonlinestore.Interface.ITotal;
 import com.onlinestore.kodigonlinestore.Model.Item;
 
-public class ItemOrder implements com.onlinestore.kodigonlinestore.Controller.ITotal {
+public class ItemOrder implements ITotal {
     private Item item;
     private int quantity;
 
