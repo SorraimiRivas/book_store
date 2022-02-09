@@ -4,7 +4,6 @@ create table customer(
  id_customer int(11) auto_increment primary key not null,
  customer_name varchar(50),
  lastname varchar(50),
- adress varchar(100),
  email varchar(50),
  pass varchar (20),
  is_admin int(15)
