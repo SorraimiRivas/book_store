@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/book")
 public class BookController {
@@ -25,6 +27,23 @@ public class BookController {
     public ResponseEntity<Book> save(@RequestBody Book bok){
         Book obj = repository.save(bok);
         return new ResponseEntity<>(obj, HttpStatus.OK);
+    }
+    @GetMapping("/find/{id}")
+    public Optional<Book
+            > find(@PathVariable Long id){
+        return repository.findById(id);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<Book> delete(@PathVariable Long id){
+        Optional<Book> book = repository.findById(id);
+
+        if(book.isPresent()){
+            repository.deleteById(id);
+        }else{
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

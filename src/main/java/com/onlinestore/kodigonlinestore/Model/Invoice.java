@@ -1,7 +1,9 @@
 package com.onlinestore.kodigonlinestore.Model;
 
+import java.util.List;
+
 public abstract class Invoice {
-    ItemOrder[] order;
+    List<ItemOrder> order;
     AppUser costumer;
 
 }

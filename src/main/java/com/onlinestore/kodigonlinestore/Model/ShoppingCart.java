@@ -1,7 +1,10 @@
 package com.onlinestore.kodigonlinestore.Model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.onlinestore.kodigonlinestore.Interface.IPurchase;
+import com.onlinestore.kodigonlinestore.Interface.ISubTotal;
+import com.onlinestore.kodigonlinestore.Interface.ITax;
+import com.onlinestore.kodigonlinestore.Interface.ITotal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +18,7 @@ import java.io.Serializable;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingCart extends Invoice implements Serializable,ITax, ISubTotal, ITotal, IPurchase {
+public class ShoppingCart extends Invoice implements Serializable, ITax, ISubTotal, ITotal, IPurchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,29 +33,33 @@ public class ShoppingCart extends Invoice implements Serializable,ITax, ISubTota
 
     private Customer idCustomer;
 
-  @Override
+    private double itemLoop(){
+        return this.order.stream().mapToDouble(ItemOrder::getTotal).sum();
+    }
+
+    @Override
     public double getTax() {
-        return 0;
+        return (itemLoop())*0.15;
     }
 
     @Override
     public double getSubTotal() {
-        return 0;
+        return itemLoop();
     }
 
     @Override
     public double getTotal() {
-        return 0;
+        return getSubTotal()+getTax();
     }
 
     @Override
-    public void add(ItemOrder adder) {
-
+    public void add(ItemOrder item) {
+        this.order.add(item);
     }
 
     @Override
-    public void remove(ItemOrder remover) {
-
+    public void remove(ItemOrder item) {
+        this.order.remove(item);
     }
 
 }
