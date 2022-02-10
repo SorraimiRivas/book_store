@@ -7,17 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api")
-public class CustomerController {
+@RequestMapping("/users")
+public class CustomerController  {
 
     @Autowired
     private CustomerRepository customerRepository;
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     public Iterable<Customer> getAllCustomer() {
         return customerRepository.findAll();
     }

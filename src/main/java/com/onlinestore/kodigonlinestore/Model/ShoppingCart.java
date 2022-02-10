@@ -1,21 +1,36 @@
 package com.onlinestore.kodigonlinestore.Model;
 
-import com.onlinestore.kodigonlinestore.Interface.IPurchase;
-import com.onlinestore.kodigonlinestore.Interface.ISubTotal;
-import com.onlinestore.kodigonlinestore.Interface.ITax;
-import com.onlinestore.kodigonlinestore.Interface.ITotal;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name="shopping_cart")
 @Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ShoppingCart extends Invoice implements Serializable,ITax, ISubTotal, ITotal, IPurchase {
 
-public class ShoppingCart extends Invoice implements ITax, ISubTotal, ITotal, IPurchase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_shopping_cart")
+    private Long id;
+    @Column(name="total")
+    private float total;
 
-    Long id;
 
-    @Override
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
+    @JoinColumn(name="id_customer")
+
+    private Customer idCustomer;
+
+  @Override
     public double getTax() {
         return 0;
     }
@@ -39,4 +54,5 @@ public class ShoppingCart extends Invoice implements ITax, ISubTotal, ITotal, IP
     public void remove(ItemOrder remover) {
 
     }
+
 }

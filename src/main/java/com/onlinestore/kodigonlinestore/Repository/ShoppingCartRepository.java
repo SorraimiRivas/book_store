@@ -1,7 +1,14 @@
 package com.onlinestore.kodigonlinestore.Repository;
 
+
 import com.onlinestore.kodigonlinestore.Model.ShoppingCart;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ShoppingCartRepository extends CrudRepository<ShoppingCart,Long> {
+import java.io.Serializable;
+
+@Repository
+public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Serializable> {
+
+
 }
