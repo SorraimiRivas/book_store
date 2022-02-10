@@ -13,14 +13,15 @@ import {
 function Navbar() {
   return (
     <NavbarContainer>
-      <LeftContainer>
-        <NavbarInnerContainer>
-          <NavbarLink to="/home">Home</NavbarLink>
+      <NavbarInnerContainer>
+        <LeftContainer>
+          <NavbarLink to="/">Home</NavbarLink>
           <NavbarLink to="/orders">Orders</NavbarLink>
-          <NavbarLink to="/login">Log In</NavbarLink>
-        </NavbarInnerContainer>
-      </LeftContainer>
-      <RightContainer></RightContainer>
+        </LeftContainer>
+        <RightContainer>
+          <NavbarLink to="/login">Login</NavbarLink>
+        </RightContainer>
+      </NavbarInnerContainer>
     </NavbarContainer>
   );
 }

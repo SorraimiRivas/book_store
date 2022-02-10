@@ -1,13 +1,11 @@
 import "./App.css";
 import styled from "styled-components";
-import { AccountForm } from "./components/accountForm";
 import { NavbarLink } from "./components/styles/styles";
 import Navbar from "./components/Navbar";
-import { BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeScreen from "./components/screens/HomeScreen";
-import { Route } from "react-router";
-import LoginScreen from "./components/screens/LoginScreen";
 import OrderScreen from "./components/screens/OrdersScreen";
+import Login from "./components/screens/loginScreen";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -24,13 +22,14 @@ function App() {
       <AppContainer>
         <Navbar>
           <Routes>
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path="/home" element={<HomeScreen />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<HomeScreen />} />
             <Route path="/orders" element={<OrderScreen />} />
           </Routes>
         </Navbar>
       </AppContainer>
     </Router>
+    // <Login />
   );
 }
 

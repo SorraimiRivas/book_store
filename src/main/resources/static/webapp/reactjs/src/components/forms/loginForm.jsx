@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AccountContext } from "../accountContext";
+import { FormContext } from "../formContext";
 import { Marginer } from "../Margin";
 import {
   BoxContainer,
@@ -11,7 +11,7 @@ import {
 } from "../styles/styles";
 
 export function LoginForm() {
-  const { switchToSignup } = useContext(AccountContext);
+  const { switchToSignup } = useContext(FormContext);
 
   return (
     <BoxContainer>
