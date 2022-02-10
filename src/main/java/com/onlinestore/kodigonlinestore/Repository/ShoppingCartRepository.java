@@ -10,4 +10,5 @@ import java.io.Serializable;
 @Repository
 public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Serializable> {
 
+
 }

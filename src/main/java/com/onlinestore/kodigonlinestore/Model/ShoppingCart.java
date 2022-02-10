@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingCart implements Serializable {
+public class ShoppingCart extends Invoice implements Serializable,ITax, ISubTotal, ITotal, IPurchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +30,29 @@ public class ShoppingCart implements Serializable {
 
     private Customer idCustomer;
 
+  @Override
+    public double getTax() {
+        return 0;
+    }
+
+    @Override
+    public double getSubTotal() {
+        return 0;
+    }
+
+    @Override
+    public double getTotal() {
+        return 0;
+    }
+
+    @Override
+    public void add(ItemOrder adder) {
+
+    }
+
+    @Override
+    public void remove(ItemOrder remover) {
+
+    }
 
 }
