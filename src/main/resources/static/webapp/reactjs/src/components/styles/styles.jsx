@@ -83,11 +83,14 @@ export const NavbarContainer = styled.nav`
   width: 100%;
   height: 65px;
   display: flex;
+  position: absolute;
+  top: 0;
+  color: #1909af;
   flex-direction: column;
-  background: rgb(25,9,175);
+  background: rgb(25,10,171);
   background: linear-gradient(90deg,
-  rgba(25,9,175,1) 0%,
-  rgba(2,145,185,1) 29%);
+  rgba(25,10,171,1) 0%,
+  rgba(2,145,185,1) 0%);
   );
 `;
 
@@ -116,7 +119,7 @@ export const NavbarLinkContainer = styled.div`
 `;
 
 export const NavbarLink = styled(Link)`
-  color: red;
+  color: white;
   font-size: x-large;
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;

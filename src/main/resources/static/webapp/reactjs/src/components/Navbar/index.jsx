@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import {
   NavbarInnerContainer,
@@ -7,20 +8,19 @@ import {
   RightContainer,
   NavbarLink,
   Logo,
-} from "../accountForm/common";
+} from "../styles/styles";
 
 function Navbar() {
   return (
     <NavbarContainer>
-      <NavbarInnerContainer>
-        <LeftContainer>
-          <NavbarContainer>
-            <Logo></Logo>
-            {/* <NavbarLink to="/">Home</NavbarLink> */}
-          </NavbarContainer>
-        </LeftContainer>
-        <RightContainer></RightContainer>
-      </NavbarInnerContainer>
+      <LeftContainer>
+        <NavbarInnerContainer>
+          <NavbarLink to="/home">Home</NavbarLink>
+          <NavbarLink to="/orders">Orders</NavbarLink>
+          <NavbarLink to="/login">Log In</NavbarLink>
+        </NavbarInnerContainer>
+      </LeftContainer>
+      <RightContainer></RightContainer>
     </NavbarContainer>
   );
 }

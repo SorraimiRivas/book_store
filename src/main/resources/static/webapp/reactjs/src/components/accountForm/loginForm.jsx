@@ -8,7 +8,7 @@ import {
   MutedLink,
   SubmitButton,
   BoldLink,
-} from "./common";
+} from "../styles/styles";
 
 export function LoginForm() {
   const { switchToSignup } = useContext(AccountContext);
