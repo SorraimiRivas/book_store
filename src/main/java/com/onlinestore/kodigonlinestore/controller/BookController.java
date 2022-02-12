@@ -18,7 +18,7 @@ public class BookController {
     @Autowired
     private BookRepository repository;
 
-    @GetMapping("/get")
+    @GetMapping("/all")
     public Iterable<Book> getAllCustomer() {
         return repository.findAll();
     }
@@ -29,8 +29,7 @@ public class BookController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
     @GetMapping("/find/{id}")
-    public Optional<Book
-            > find(@PathVariable Long id){
+    public Optional<Book> find(@PathVariable Long id){
         return repository.findById(id);
     }
 

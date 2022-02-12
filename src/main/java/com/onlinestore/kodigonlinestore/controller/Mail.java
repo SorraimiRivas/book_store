@@ -11,8 +11,8 @@ public class Mail {
         String Mail = sc.nextLine();
         StringBuilder bodyText = new StringBuilder();
 
-        bodyText.append("Book Title: "+ item.getTitle().toUpperCase() +"\n");
-        bodyText.append("Price: "+ item.getItemPrice() +"\n");
+        bodyText.append("Book Title: ").append(item.getTitle().toUpperCase()).append("\n");
+        bodyText.append("Price: ").append(item.getItemPrice()).append("\n");
 
         MailSender.sendMail(Mail,bodyText.toString(), "Kodigo Online Book Store Bill");
     }

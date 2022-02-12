@@ -1,6 +1,7 @@
 package com.onlinestore.kodigonlinestore.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.onlinestore.kodigonlinestore.Interface.IPurchase;
 import com.onlinestore.kodigonlinestore.Interface.ISubTotal;
 import com.onlinestore.kodigonlinestore.Interface.ITax;
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="shopping_cart")
@@ -30,8 +32,11 @@ public class ShoppingCart extends Invoice implements Serializable, ITax, ISubTot
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
     @JoinColumn(name="id_customer")
-
     private Customer idCustomer;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="idShoppingCart")
+    @JsonBackReference
+    private List<ItemOrder> itemOrder;
 
     private double itemLoop(){
         return this.order.stream().mapToDouble(ItemOrder::getTotal).sum();

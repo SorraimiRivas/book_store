@@ -1,38 +1,28 @@
 package com.onlinestore.kodigonlinestore.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @Getter @Setter
-@MappedSuperclass
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_book")
     private Long itemId;
+    @Column(name="title")
     private String title;
-    private Long itemPrice;
-    private String itemImage;
+    @Column(name="price_book")
+    private float itemPrice;
+    @Column(name="img")
+    private byte[] itemImage;
+    @Column(name="category")
     private String category;
 
-    public Item(String title,
-                Long itemId,
-                Long itemPrice,
-                String itemImage,
-                String category) {
-        this.title = title;
-        this.itemId = itemId;
-        this.itemPrice = itemPrice;
-        this.itemImage = itemImage;
-        this.category = category;
-    }
-
-    public Item() {
-
-    }
 }
