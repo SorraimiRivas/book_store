@@ -25,6 +25,5 @@ public abstract class  AppUser {
     private boolean isAdmin;
     @Column(name="pass")
     private String password;
-
-
+    
 }

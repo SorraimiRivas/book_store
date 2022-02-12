@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Table(name = "item_cart")
 public class ItemOrder implements ITotal, Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_item_cart")
@@ -31,7 +30,6 @@ public class ItemOrder implements ITotal, Serializable {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
     @JoinColumn(name="id_shopping_cart")
     private ShoppingCart idShoppingCart;
-
 
     @Override
     public double getTotal() {

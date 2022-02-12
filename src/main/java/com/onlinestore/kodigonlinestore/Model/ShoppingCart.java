@@ -28,7 +28,6 @@ public class ShoppingCart extends Invoice implements Serializable, ITax, ISubTot
     private Long id;
     private float total;
 
-
     private double itemLoop(){
         return this.getItemOrder().stream().mapToDouble(ItemOrder::getTotal).sum();
     }
