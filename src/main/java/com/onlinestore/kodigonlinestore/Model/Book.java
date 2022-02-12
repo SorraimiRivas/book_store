@@ -16,9 +16,10 @@ import java.util.List;
 @Entity
 @Table(name="book")
 public class Book extends Item{
+
     private String author;
     private String editorial;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="idBook")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="idItem")
     @JsonBackReference
-    private List<ItemOrder> itemOrder;
+    private ItemOrder itemOrder;
 }

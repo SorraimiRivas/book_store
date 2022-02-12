@@ -10,15 +10,15 @@ import javax.persistence.*;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_book")
+    @Column(name="item_id")
     private Long itemId;
-    @Column(name="title")
     private String title;
-    @Column(name="price_book")
+    @Column(name="price")
     private float itemPrice;
     @Column(name="img")
     private byte[] itemImage;

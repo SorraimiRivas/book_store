@@ -16,18 +16,17 @@ import java.io.Serializable;
 @Entity
 @Table(name = "item_cart")
 public class ItemOrder implements ITotal, Serializable {
-   private Item item;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_item_cart")
     private Long id;
-    @Column(name = "quantity")
     private double quantity;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
-    @JoinColumn(name="id_book")
-    private Book idBook;
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
+    @JoinColumn(name="id_item")
+    private Item idItem;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
     @JoinColumn(name="id_shopping_cart")
@@ -35,9 +34,8 @@ public class ItemOrder implements ITotal, Serializable {
 
 
     @Override
-    @Column(name = "subtotal")
     public double getTotal() {
-        return item.getItemPrice()*quantity;
+        return idItem.getItemPrice()*quantity;
     }
 }
 

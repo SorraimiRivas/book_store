@@ -26,20 +26,11 @@ public class ShoppingCart extends Invoice implements Serializable, ITax, ISubTot
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_shopping_cart")
     private Long id;
-    @Column(name="total")
     private float total;
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional =false)
-    @JoinColumn(name="id_customer")
-    private Customer idCustomer;
-
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="idShoppingCart")
-    @JsonBackReference
-    private List<ItemOrder> itemOrder;
-
     private double itemLoop(){
-        return this.order.stream().mapToDouble(ItemOrder::getTotal).sum();
+        return this.getItemOrder().stream().mapToDouble(ItemOrder::getTotal).sum();
     }
 
     @Override
@@ -59,12 +50,16 @@ public class ShoppingCart extends Invoice implements Serializable, ITax, ISubTot
 
     @Override
     public void add(ItemOrder item) {
-        this.order.add(item);
+        List<ItemOrder> lis =this.getItemOrder();
+        lis.add(item);
+        this.setItemOrder(lis);
     }
 
     @Override
     public void remove(ItemOrder item) {
-        this.order.remove(item);
+        List<ItemOrder> lis =this.getItemOrder();
+        lis.remove(item);
+        this.setItemOrder(lis);
     }
 
 }
