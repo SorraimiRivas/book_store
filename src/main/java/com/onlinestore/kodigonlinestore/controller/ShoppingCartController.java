@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/shoppingcart")
+@RequestMapping("/shopping-cart")
 public class ShoppingCartController {
 
     @Autowired
@@ -22,6 +22,7 @@ public class ShoppingCartController {
     public Iterable<ShoppingCart> getAllShoppingCart(){
         return SCRepository.findAll();
     }
+
     @GetMapping("/find/{id}")
     public Optional<ShoppingCart> find(@PathVariable Long id){
         return SCRepository.findById(id);
