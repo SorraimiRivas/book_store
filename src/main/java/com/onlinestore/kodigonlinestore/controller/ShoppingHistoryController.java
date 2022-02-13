@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+import static com.onlinestore.kodigonlinestore.Controller.Mail.SendBillTo;
+
 @RestController
 @RequestMapping("/shopping-history")
 public class ShoppingHistoryController {
@@ -35,7 +37,8 @@ public class ShoppingHistoryController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
     @GetMapping("/pay")
-    public ResponseEntity<ShoppingHistory> pay(@RequestBody Invoice shoppincart){
+    public ResponseEntity<ShoppingHistory> pay(@RequestBody Invoice shoppincart) throws Exception {
+        SendBillTo((ShoppingHistory)shoppincart,shoppincart.getIdCustomer());
         ShoppingHistory obj = SHRepository.save((ShoppingHistory) shoppincart);
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
