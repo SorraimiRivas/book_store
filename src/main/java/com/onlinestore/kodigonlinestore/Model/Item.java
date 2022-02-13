@@ -21,6 +21,7 @@ public abstract class Item {
     @Column(name="price")
     private float itemPrice;
     @Column(name="img")
+    @Lob
     private byte[] itemImage;
     @Column(name="category")
     private String category;

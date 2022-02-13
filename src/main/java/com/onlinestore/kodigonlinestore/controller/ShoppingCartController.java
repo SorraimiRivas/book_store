@@ -1,6 +1,5 @@
 package com.onlinestore.kodigonlinestore.Controller;
 
-import com.onlinestore.kodigonlinestore.Model.Customer;
 import com.onlinestore.kodigonlinestore.Model.ShoppingCart;
 import com.onlinestore.kodigonlinestore.Repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;

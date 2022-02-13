@@ -22,4 +22,6 @@ public abstract class Invoice {
     @JsonBackReference
     private List<ItemOrder> itemOrder;
 
+    private double total;
+
 }
