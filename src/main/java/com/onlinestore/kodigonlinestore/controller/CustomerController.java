@@ -7,17 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.Optional;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/users")
 public class CustomerController  {
 
     @Autowired
     private CustomerRepository customerRepository;
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/all")
     public Iterable<Customer> getAllCustomer() {
         return customerRepository.findAll();
@@ -45,7 +46,6 @@ public class CustomerController  {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 
 }
