@@ -1,11 +1,13 @@
 package com.onlinestore.kodigonlinestore.Controller;
 
+import com.onlinestore.kodigonlinestore.Model.Book;
 import com.onlinestore.kodigonlinestore.Model.Customer;
 import com.onlinestore.kodigonlinestore.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ public class CustomerController  {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    
     @GetMapping("/all")
     public Iterable<Customer> getAllCustomer() {
         return customerRepository.findAll();
@@ -33,6 +35,23 @@ public class CustomerController  {
     public ResponseEntity<Customer> save(@RequestBody Customer customer){
         Customer obj = customerRepository.save(customer);
         return new ResponseEntity<>(obj, HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Customer> update(@RequestBody Customer cus){
+        Iterable<Customer> obj = customerRepository.findAll();
+        var ref = new Object() {
+            Customer customer;
+        };
+        obj.forEach((n)->{
+            ref.customer =(Objects.equals(n.getUserId(), cus.getUserId()))?cus: ref.customer;});
+
+        if (ref.customer ==null) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }else {
+            customerRepository.save(ref.customer);
+            return new ResponseEntity<>(ref.customer, HttpStatus.OK);
+        }
     }
 
     @GetMapping("/delete/{id}")

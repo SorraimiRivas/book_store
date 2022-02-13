@@ -26,7 +26,7 @@ public class ShoppingCart extends Invoice implements Serializable, ITax, ISubTot
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_shopping_cart")
     private Long id;
-    private float total;
+
 
     private double itemLoop(){
         return this.getItemOrder().stream().mapToDouble(ItemOrder::getTotal).sum();
