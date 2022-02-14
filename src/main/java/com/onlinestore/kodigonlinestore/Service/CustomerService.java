@@ -27,7 +27,7 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
-    private Optional<Customer> findWithEmail(String mail){
+    public Optional<Customer> findWithEmail(String mail){
         List<Customer> allCos = (List<Customer>) customerRepository.findAll();
         Optional<Customer> customer;
         customer = allCos.stream().filter((n)->Objects.
@@ -35,10 +35,6 @@ public class CustomerService {
         return customer;
     }
 
-    public boolean loginValidation(String mail, String pass){
-        Optional<Customer> cos = findWithEmail(mail);
-        return cos.map(customer -> customer.getPassword().equals(pass)).orElse(false);
-    }
 
     public Customer save(Customer customer){
         Customer cos = prepareDefCustomer(customer);

@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,11 +27,13 @@ public class CustomerController  {
     private CustomerService service;
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('Admin')")
     public Iterable<Customer> getAllCustomer() {
         return service.getAllCustomer();
     }
 
     @GetMapping("/find/{id}")
+    @PreAuthorize("hasRole('Admin')")
     public Optional<Customer> find(@PathVariable Long id){
         return service.find(id);
     }
@@ -42,6 +45,7 @@ public class CustomerController  {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasRole('Admin','User')")
     public ResponseEntity<Customer> update(@RequestBody Customer cus){
         if (Objects.isNull(service.update(cus))) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
@@ -51,6 +55,7 @@ public class CustomerController  {
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Customer> delete(@PathVariable Long id){
         if(service.delete(id)){
             return new ResponseEntity<>(HttpStatus.OK);
@@ -59,17 +64,6 @@ public class CustomerController  {
         }
     }
 
-    @GetMapping("/login")
-    public boolean findWithMail(@RequestBody login log){
-        return service.loginValidation(log.getMail(),log.getPass());
-    }
-
 }
 
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-class login{
-   private String mail;
-   private String pass;
-}
+
