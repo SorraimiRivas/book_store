@@ -5,6 +5,7 @@ import com.onlinestore.kodigonlinestore.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -16,25 +17,24 @@ public class BookService {
     public Iterable<Book> getAllBooks() {
         return repository.findAll();
     }
-
-
+    
     public Book saveBook(Book bok){
         return repository.save(bok);
     }
 
     public Book update(Book bok){
-        Iterable<Book> obj = repository.findAll();
-        var ref = new Object() {
-            Book book;
-        };
-        obj.forEach((n)->{
-            ref.book =(Objects.equals(n.getItemId(), bok.getItemId()))?bok: ref.book;});
+        List<Book> obj = (List<Book>) repository.findAll();
 
-        if (Objects.isNull(ref.book)) {
+        Optional<Book> book;
+
+        book = obj.stream().filter((n)->Objects.
+                equals(n.getItemId(), bok.getItemId())).findFirst();
+
+        if (book.isEmpty()) {
             return null;
         }else {
-            repository.save(ref.book);
-            return ref.book;
+            repository.save(book.get());
+            return book.get();
         }
     }
 
