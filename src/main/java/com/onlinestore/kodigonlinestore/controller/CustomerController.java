@@ -4,6 +4,10 @@ package com.onlinestore.kodigonlinestore.Controller;
 import com.onlinestore.kodigonlinestore.Model.Customer;
 import com.onlinestore.kodigonlinestore.Repository.CustomerRepository;
 import com.onlinestore.kodigonlinestore.Service.CustomerService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +59,17 @@ public class CustomerController  {
         }
     }
 
+    @GetMapping("/login")
+    public boolean findWithMail(@RequestBody login log){
+        return service.loginValidation(log.getMail(),log.getPass());
+    }
 
+}
+
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+class login{
+   private String mail;
+   private String pass;
 }

@@ -7,10 +7,8 @@ import com.onlinestore.kodigonlinestore.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class CustomerService {
@@ -29,24 +27,36 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
+    private Optional<Customer> findWithEmail(String mail){
+        List<Customer> allCos = (List<Customer>) customerRepository.findAll();
+        Optional<Customer> customer;
+        customer = allCos.stream().filter((n)->Objects.
+                equals(n.getEmail(),mail)).findFirst();
+        return customer;
+    }
+
+    public boolean loginValidation(String mail, String pass){
+        Optional<Customer> cos = findWithEmail(mail);
+        return cos.map(customer -> customer.getPassword().equals(pass)).orElse(false);
+    }
+
     public Customer save(Customer customer){
         Customer cos = prepareDefCustomer(customer);
         return customerRepository.save(cos);
     }
 
     public Customer update(Customer cus){
-        Iterable<Customer> obj = customerRepository.findAll();
-        var ref = new Object() {
-            Customer customer;
-        };
-        obj.forEach((n)->{
-            ref.customer =(Objects.equals(n.getUserId(), cus.getUserId()))?cus: ref.customer;});
+        List<Customer> obj = (List<Customer>)customerRepository.findAll();
 
-        if (Objects.isNull(ref.customer)) {
+        Optional<Customer> customer;
+        customer = obj.stream().filter((n)->Objects.
+                equals(n.getUserId(), cus.getUserId())).findFirst();
+
+        if (customer.isEmpty()) {
             return null;
         }else {
-            customerRepository.save(ref.customer);
-            return ref.customer;
+            customerRepository.save(customer.get());
+            return customer.get();
         }
     }
 
