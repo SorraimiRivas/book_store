@@ -19,4 +19,6 @@ public class  Customer extends AppUser implements Serializable {
 @JsonBackReference
 private List<ShoppingCart> shoppingcart;
 
+
+
 }

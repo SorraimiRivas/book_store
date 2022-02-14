@@ -1,7 +1,7 @@
 package com.onlinestore.kodigonlinestore.Controller;
 
 import com.onlinestore.kodigonlinestore.Model.Book;
-import com.onlinestore.kodigonlinestore.Repository.BookRepository;
+import com.onlinestore.kodigonlinestore.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,50 +15,38 @@ import java.util.Optional;
 public class BookController {
 
     @Autowired
-    private BookRepository repository;
+    private BookService service;
 
     @GetMapping("/all")
-    public Iterable<Book> getAllBooks() {
-        return repository.findAll();
-    }
+    public Iterable<Book> getAllBooks() {return service.getAllBooks();}
 
     @PostMapping("/save")
     public ResponseEntity<Book> save(@RequestBody Book bok){
-        Book obj = repository.save(bok);
+        Book obj = service.saveBook(bok);
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
     @PostMapping("/update")
     public ResponseEntity<Book> update(@RequestBody Book bok){
-        Iterable<Book> obj = repository.findAll();
-        var ref = new Object() {
-            Book book;
-        };
-        obj.forEach((n)->{
-            ref.book =(Objects.equals(n.getItemId(), bok.getItemId()))?bok: ref.book;});
-
-        if (ref.book ==null) {
+        if (Objects.isNull(service.update(bok))) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }else {
-            repository.save(ref.book);
-            return new ResponseEntity<>(ref.book, HttpStatus.OK);
+            return new ResponseEntity<>(bok, HttpStatus.OK);
         }
     }
 
     @GetMapping("/find/{id}")
     public Optional<Book> find(@PathVariable Long id){
-        return repository.findById(id);
+        return service.findBook(id);
     }
 
     @GetMapping("/delete/{id}")
     public ResponseEntity<Book> delete(@PathVariable Long id){
-        Optional<Book> book = repository.findById(id);
-
-        if(book.isPresent()){
-            repository.deleteById(id);
+        if(service.deleteBook(id)){
+            return new ResponseEntity<>(HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
 

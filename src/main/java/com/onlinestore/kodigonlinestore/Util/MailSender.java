@@ -1,4 +1,4 @@
-package com.onlinestore.kodigonlinestore.Controller;
+package com.onlinestore.kodigonlinestore.Util;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

@@ -1,7 +1,6 @@
-package com.onlinestore.kodigonlinestore.Controller;
+package com.onlinestore.kodigonlinestore.Util;
 
 import com.onlinestore.kodigonlinestore.Model.Customer;
-import com.onlinestore.kodigonlinestore.Model.Item;
 import com.onlinestore.kodigonlinestore.Model.ShoppingHistory;
 
 import java.util.Scanner;

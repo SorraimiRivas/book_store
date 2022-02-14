@@ -2,6 +2,7 @@ package com.onlinestore.kodigonlinestore.Controller;
 
 import com.onlinestore.kodigonlinestore.Model.ShoppingCart;
 import com.onlinestore.kodigonlinestore.Repository.ShoppingCartRepository;
+import com.onlinestore.kodigonlinestore.Service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,33 +16,30 @@ import java.util.Optional;
 public class ShoppingCartController {
 
     @Autowired
-    private ShoppingCartRepository SCRepository;
+    private ShoppingCartService service;
 
     @GetMapping("/all")
     public Iterable<ShoppingCart> getAllShoppingCart(){
-        return SCRepository.findAll();
+        return service.getAllShoppingCart();
     }
 
     @GetMapping("/find/{id}")
-    public Optional<ShoppingCart> find(@PathVariable Long id){
-        return SCRepository.findById(id);
+    public Optional<ShoppingCart> finds(@PathVariable Long id){
+        return service.find(id);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ShoppingCart> save(@RequestBody ShoppingCart shoppincart){
-        ShoppingCart obj = SCRepository.save(shoppincart);
+    public ResponseEntity<ShoppingCart> saves(@RequestBody ShoppingCart shoppincart){
+        ShoppingCart obj = service.save(shoppincart);
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
     @GetMapping("/delete/{id}")
     public ResponseEntity<ShoppingCart> delete(@PathVariable Long id){
-        Optional<ShoppingCart> shoppincart = SCRepository.findById(id);
-
-        if(shoppincart.isPresent()){
-            SCRepository.deleteById(id);
+        if(service.delete(id)){
+            return new ResponseEntity<>(HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

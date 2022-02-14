@@ -21,8 +21,6 @@ public abstract class  AppUser {
     private String lastName;
     @Column(name="email")
     private String email;
-    @Column(name="is_admin")
-    private boolean isAdmin;
     @Column(name="pass")
     private String password;
     
