@@ -1,18 +1,25 @@
 package com.onlinestore.kodigonlinestore.Service;
 
 import com.onlinestore.kodigonlinestore.Model.Customer;
+import com.onlinestore.kodigonlinestore.Model.Role;
 import com.onlinestore.kodigonlinestore.Repository.CustomerRepository;
+import com.onlinestore.kodigonlinestore.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public Iterable<Customer> getAllCustomer() {
         return customerRepository.findAll();
@@ -23,7 +30,8 @@ public class CustomerService {
     }
 
     public Customer save(Customer customer){
-        return customerRepository.save(customer);
+        Customer cos = prepareDefCustomer(customer);
+        return customerRepository.save(cos);
     }
 
     public Customer update(Customer cus){
@@ -51,6 +59,17 @@ public class CustomerService {
         }else{
             return false;
         }
+
+    }
+
+    public Customer prepareDefCustomer(Customer def){
+        Optional<Role> defaultRole =roleRepository.findById("User");
+        if(defaultRole.isPresent()) {
+            Set<Role> setRole = new HashSet<>();
+            setRole.add(defaultRole.get());
+            def.setRole(setRole);
+        }
+        return def;
 
     }
 

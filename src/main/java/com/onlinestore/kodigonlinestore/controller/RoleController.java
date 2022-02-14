@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
+
 @RestController("/role")
 public class RoleController {
     @Autowired
@@ -16,6 +18,11 @@ public class RoleController {
     @PostMapping("/create")
     public Role createRole(@RequestBody Role role){
         return service.createRole(role);
+    }
+
+    @PostConstruct
+    public void initRolesAndUser(){
+        service.initRoles();
     }
 
 }

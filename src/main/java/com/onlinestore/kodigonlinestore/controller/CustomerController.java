@@ -15,7 +15,6 @@ import java.util.Optional;
 
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/users")
 public class CustomerController  {
 

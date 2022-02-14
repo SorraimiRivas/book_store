@@ -18,7 +18,4 @@ public class  Customer extends AppUser implements Serializable {
 @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "idCustomer")
 @JsonBackReference
 private List<ShoppingCart> shoppingcart;
-
-
-
 }
