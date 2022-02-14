@@ -51,7 +51,6 @@ export default function ButtonAppBar() {
               <NavbarLink className={classes.font} to="/">
                 Home
               </NavbarLink>
-              <NavbarLink to="/orders">Orders</NavbarLink>
             </Typography>
             <NavbarLink to="/login">
               <Button font="Poppins" color="inherit">

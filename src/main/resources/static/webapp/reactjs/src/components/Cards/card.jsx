@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { NavbarLink } from "../styles/styles";
+
 const { faker } = require("@faker-js/faker");
 
 const useStyles = makeStyles({
@@ -45,9 +47,11 @@ export default function ItemCard() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Details
-        </Button>
+        <NavbarLink to="/details">
+          <Button size="small" color="primary">
+            Details
+          </Button>
+        </NavbarLink>
         <Button size="small" color="primary">
           Add to cart
         </Button>
